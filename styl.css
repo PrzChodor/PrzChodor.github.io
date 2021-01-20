@@ -137,19 +137,19 @@ html, body {
 
 #sunTime {
     margin: 0px;
-    width: 90%;
+    width: 70%;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-evenly;
     color: var(--main);
-    font-size: 4vh;
-    font-size: calc(var(--vh, 1vh) * 4);
+    font-size: 3vh;
+    font-size: calc(var(--vh, 1vh) * 3);
 }
 
 #sunTime>img {
-    height: 4vh;
-    height: calc(var(--vh, 1vh) * 4);
+    height: 3vh;
+    height: calc(var(--vh, 1vh) * 3);
 }
 
 #sunTime>p {
@@ -159,16 +159,16 @@ html, body {
 #line {
     border-left: 0.4vh solid var(--main);
     border-left: calc(var(--vh, 1vh) * 0.4) solid var(--main);
-    height: 3vh;
-    height: calc(var(--vh, 1vh) * 3);
+    height: 2.5vh;
+    height: calc(var(--vh, 1vh) * 2.5);
 }
 
 #cityName {
     color: var(--main);
     margin: 0px;
     font-weight: normal;
-    word-break: keep-all;
-    overflow:hidden;
+    white-space: nowrap;
+    overflow: hidden;
     font-size: 6vh;
     font-size: calc(var(--vh, 1vh) * 6);
 }
@@ -375,7 +375,9 @@ html, body {
         margin-top: 5vh;
         margin-top: calc(var(--vh, 1vh) * 5);
         max-width: 35%;
-        word-break: normal;
+        font-size: 7vh;
+        font-size: calc(var(--vh, 1vh) * 7);
+        white-space: normal;
         text-align: center;
     }
     #mainWeather {
