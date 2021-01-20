@@ -42,7 +42,7 @@ function checkStorage() {
     } else if (cityName != null) {
         loadCity(lat, lng, cityName);
     } else {
-        showWelcome()
+        showWelcome();
     }
 
     if (theme == null || theme == 'Light') {
@@ -236,9 +236,9 @@ function showLoading() {
 function hideLoading() {
     document.getElementById('loadingScreen').style.transition = "opacity 1s";
     document.getElementById("loadingScreen").style.opacity = 0;
-    document.getElementById("loadingScreen").ontransitionend = function () {
+    setTimeout(function () {
         document.getElementById("loadingScreen").style.display = "none";
-    };
+    }, 1000);
 }
 
 function showWelcome() {
