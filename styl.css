@@ -49,7 +49,6 @@ html, body {
 }
 
 .topBarButton {
-    width: auto;
     height: 5vh;
     height: calc(var(--vh, 1vh) * 5);
     cursor: pointer;
@@ -85,7 +84,6 @@ html, body {
 }
 
 .result>img {
-    width: auto;
     height: 5vh;
     height: calc(var(--vh, 1vh) * 5);
 }
@@ -138,17 +136,21 @@ html, body {
 }
 
 #sunTime {
+    margin: 0px;
     width: 40%;
+    min-width: 30vh;
     min-width: calc(var(--vh, 1vh) * 30);
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-evenly;
     color: var(--main);
-    font-size: calc(var(--vh, 1vh) * 2)vh;
+    font-size: 2vh;
+    font-size: calc(var(--vh, 1vh) * 2);
 }
 
 #sunTime>img {
+    height: 2vh;
     height: calc(var(--vh, 1vh) * 2);
 }
 
@@ -160,7 +162,10 @@ html, body {
     color: var(--main);
     margin: 0px;
     font-weight: normal;
+    word-break: keep-all;
+    overflow:hidden;
     font-size: 6vh;
+    font-size: calc(var(--vh, 1vh) * 6);
 }
 
 #mainWeather {
@@ -170,7 +175,7 @@ html, body {
     flex-direction: row;
     justify-content: center;
     color: var(--main);
-    font-size: calc(var(--vh, 1vh) * 12);
+    font-size: calc(var(--vh, 1vh) * 10);
 }
 
 #currentTemp {
@@ -179,12 +184,14 @@ html, body {
 
 #mainImage {
     margin: 0px;
+    margin-right: 5vw;
     width: calc(var(--vh, 1vh) * 12);
 }
 
 #weatherData {
     width: 100%;
-    height: calc(var(--vh, 1vh) * 27);
+    height: 32vh;
+    height: calc(var(--vh, 1vh) * 32);
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -194,11 +201,12 @@ html, body {
 }
 
 #weatherData>div {
-    border: 0.2vh solid var(--main);
-    border: calc(var(--vh, 1vh) * 0.2) solid var(--main);
+    border: 0.4vh solid var(--main);
+    border: calc(var(--vh, 1vh) * 0.4) solid var(--main);
     border-radius: 4vmin;
     width: 30%;
-    height: calc(var(--vh, 1vh) * 12);
+    height: 14vh;
+    height: calc(var(--vh, 1vh) * 14);
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -209,6 +217,7 @@ html, body {
 
 #weatherData img {
     margin: 0px;
+    height: 3vh;
     height: calc(var(--vh, 1vh) * 3);
 }
 
@@ -226,6 +235,12 @@ html, body {
     color: var(--main);
 }
 
+#nextDays>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .date {
     margin: 0px;
     font-size: 3vh;
@@ -234,21 +249,20 @@ html, body {
 }
 
 .weatherIcon {
-    display: flex;
-    flex-direction: column;
+    margin: 0px;
     height: 7vh;
     height: calc(var(--vh, 1vh) * 7);
 }
 
 .temp {
-    font-size: 4vh;
+    font-size: 3vh;
     font-size: calc(var(--vh, 1vh) * 3);
     margin: 0px;
     text-align: center;
 }
 
 #line {
-    border-left: 0.5vw solid var(--main);
+    border-left: 0.3vmin solid var(--main);
     height: 2vh;
     height: calc(var(--vh, 1vh) * 2);
 }
@@ -283,7 +297,7 @@ html, body {
 }
 
 *::-webkit-scrollbar {
-    width: 2vw;
+    width: 2vmin;
 }
 
 *::-webkit-scrollbar-track {
@@ -320,6 +334,10 @@ html, body {
 
 @media (orientation: landscape) {
     .message {
+        max-height: 87.2vh;
+        max-height: calc(var(--vh, 1vh) * 87.2);
+        width: 90vw;
+        margin: 0px 5vw;
         align-items: center;
         align-content: center;
         flex-direction: row;
@@ -330,5 +348,122 @@ html, body {
     }
     .message>div {
         flex-grow: 1;
+    }
+    #weather {
+        margin: 0px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #sunTime {
+        margin-top: 3vh;
+        margin-top: calc(var(--vh, 1vh) * 3);
+        width: 30%;
+        min-width: 0;
+        font-size: 2vh;
+        font-size: calc(var(--vh, 1vh) * 4);
+    }
+    #sunTime>img {
+        height: 4vh;
+        height: calc(var(--vh, 1vh) * 4);
+    }
+    #line {
+        height: 4vh;
+        height: calc(var(--vh, 1vh) * 3);
+    }
+    #cityName {
+        margin-top: 5vh;
+        margin-top: calc(var(--vh, 1vh) * 5);
+        max-width: 35%;
+        word-break: normal;
+        text-align: center;
+    }
+    #mainWeather {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        color: var(--main);
+        font-size: calc(var(--vh, 1vh) * 15);
+    }
+    #mainImage {
+        margin: 0px;
+        width: calc(var(--vh, 1vh) * 36);
+    }
+    #weatherData {
+        width: 50%;
+        height: 53vh;
+        height: calc(var(--vh, 1vh) * 53);
+    }
+    #weatherData>div {
+        height: 30vh;
+        height: calc(var(--vh, 1vh) * 25);
+        font-size: 2vw;
+    }
+    #weatherData img {
+        height: 4vw;
+    }
+    #weatherData p {
+        font-size: 2.5vw;
+    }
+    #nextDays {
+        margin-top: 4vh;
+        margin-top: calc(var(--vh, 1vh) * 4);
+        width: 60%;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-evenly;
+        color: var(--main);
+    }
+    .date {
+        font-size: 5vh;
+        font-size: calc(var(--vh, 1vh) * 5);
+    }
+    .weatherIcon {
+        height: 12vh;
+        height: calc(var(--vh, 1vh) * 12);
+    }
+    .temp {
+        font-size: 5vh;
+        font-size: calc(var(--vh, 1vh) * 5);
+    }
+    .result {
+        font-size: 6vh;
+        font-size: calc(var(--vh, 1vh) * 6);
+    }
+    .result>img {
+        height: 10vh;
+        height: calc(var(--vh, 1vh) * 10);
+    }
+    #topBar {
+        margin: 4vh 2vw 0px 2vw;
+        margin: calc(var(--vh, 1vh) * 4) 2vw 0px 2vw;
+    }
+    #searchBar {
+        height: 8vh;
+        height: calc(var(--vh, 1vh) * 8);
+        font-size: 5vh;
+        font-size: calc(var(--vh, 1vh) * 5);
+        background-position: 2vh 1vh;
+        background-position: calc(var(--vh, 1vh) * 2) calc(var(--vh, 1vh) * 1);
+        background-size: 6vh;
+        background-size: calc(var(--vh, 1vh) * 6);
+        padding: 0px 2vw 0px 9vh;
+        padding: 0px 2vw 0px calc(var(--vh, 1vh) * 9);
+    }
+    .topBarButton {
+        height: 8vh;
+        height: calc(var(--vh, 1vh) * 8);
+    }
+    #searchResults {
+        top: 16.8vh;
+        top: calc(var(--vh, 1vh) * 16.8);
+        max-height: 83.2vh;
+        max-height: calc(var(--vh, 1vh) * 83.2);
+    }
+    #loadingScreen {
+        top: 12.8vh;
+        top: calc(var(--vh, 1vh) * 12.8);
+        max-height: 87.2vh;
+        max-height: calc(var(--vh, 1vh) * 87.2);
     }
 }

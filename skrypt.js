@@ -16,12 +16,12 @@ citiesRequest.onreadystatechange = function () {
         getCities(this.responseText);
     } else if (this.status > 299 && this.readyState == 4) {
         hideLoading();
-        showError("Błąd połączenia z bazą miast!");
+        showError("Błąd połączenia z bazą miast! Spróbuj ponownie później.");
     }
 };
 citiesRequest.onerror = function () {
     hideLoading();
-    showError("Błąd połączenia z bazą miast!")
+    showError("Błąd połączenia z bazą miast! Spróbuj ponownie później.")
 };
 checkStorage();
 
