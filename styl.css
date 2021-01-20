@@ -333,7 +333,7 @@ html, body {
     }
 }
 
-@media (orientation: landscape) {
+@media screen and (min-device-aspect-ratio: 1/1) and (orientation: landscape) {
     .message {
         max-height: 87.2vh;
         max-height: calc(var(--vh, 1vh) * 87.2);

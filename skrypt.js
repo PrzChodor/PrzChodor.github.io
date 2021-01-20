@@ -1,13 +1,19 @@
 var cities;
 var i;
 var maxResults = 10;
+var lastAvailHeight = window.screen.availHeight;
 
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 window.addEventListener('resize', () => {
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    if (document.activeElement !== document.getElementById("searchBar") || lastAvailHeight != window.screen.availHeight || !/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        if (lastAvailHeight != window.screen.availHeight)
+            hideKeyboard();
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        lastAvailHeight = window.screen.availHeight;
+    }
 });
 
 var citiesRequest = new XMLHttpRequest();
@@ -98,7 +104,11 @@ function getCities(responseText) {
     hideLoading();
 }
 
-function searchCity() {
+function searchCity(event) {
+    if (event.key === "Enter") {
+        hideKeyboard();
+        return;
+    }
     var text = document.getElementById("searchBar").value;
     if (text.length > 2) {
         showLoading();
@@ -261,4 +271,8 @@ function showError(e) {
     element.classList.remove("slide-in-anim");
     void element.offsetWidth;
     element.classList.add("slide-in-anim");
+}
+
+function hideKeyboard() {
+    document.activeElement.blur();
 }

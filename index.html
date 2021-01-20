@@ -15,8 +15,8 @@
 <body>
     <div id="topBar">
         <img src="Icons/Moon.svg" onclick="switchTheme()" class="topBarButton" id="themeButton">
-        <input type="text" id="searchBar" onkeyup="searchCity()" onfocusin="focusSearch()" onfocusout="unfocusSearch()" placeholder="Szukaj miasta">
-        <img src="Icons/Place.svg" onclick="getLocation()" class="topBarButton" >
+        <input type="text" id="searchBar" onkeyup="searchCity(event)" placeholder="Szukaj miasta">
+        <img src="Icons/Place.svg" onclick="getLocation()" class="topBarButton">
     </div>
     <div id="weather" class="slide-in-anim">
         <div id="sunTime">
@@ -102,14 +102,15 @@
         <img src="Icons/02d.svg">
         <div>
             <h2>Witamy!</h2>
-            <p>Aby skorzystać z aplikacji wpisz nazwę poszukiwanego miasta lub naciśnij przycisk lokalizacji w prawym górnym rogu.</p>
+            <p>Aby skorzystać z aplikacji wpisz nazwę poszukiwanego miasta lub naciśnij przycisk lokalizacji w prawym
+                górnym rogu.</p>
         </div>
     </div>
     <div id="searchResults" style="z-index: 1;"></div>
     <div id="loadingScreen" style="z-index: 2;">
         <img src="Icons/Loading.svg" id="loading">
     </div>
-    <script src="skrypt.js "></script> 
+    <script src="skrypt.js "></script>
 </body>
 
 </html>
