@@ -20,7 +20,7 @@ html, body {
 
 #topBar {
     display: flex;
-    align-items: center
+    align-items: center;
 }
 
 #searchBar {
@@ -47,7 +47,8 @@ html, body {
     left: 0px;
     background-color: var(--main);
     width: 100vw;
-    max-height: calc(100vh - 9vmax);
+    max-height: 91vh; 
+    max-height: calc(var(--vh, 1vh) * 91);
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -84,9 +85,10 @@ html, body {
     margin-bottom: 0px;
 }
 
-#welcome {
+.message {
     width: 100%;
-    height: calc(100vh - 9vmax);
+    height: 91vh; 
+    height: calc(var(--vh, 1vh) * 91);
     display: flex;
     background-color: var(--background);
     align-items: flex-start;
@@ -95,22 +97,22 @@ html, body {
     justify-content: center;
 }
 
-#welcome>div {
+.message>div {
     color: var(--main);
     text-align: center;
 }
 
-#welcome>div>h2 {
+.message>div>h2 {
     font-size: 6vmax;
     margin: 1vmax;
 }
 
-#welcome>div>p {
+.message>div>p {
     font-size: 3vmax;
     margin: 1vmax;
 }
 
-#welcome>img {
+.message>img {
     margin: 0px auto;
     width: 40vmin;
 }

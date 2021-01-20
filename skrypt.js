@@ -1,22 +1,69 @@
 var cities;
 var i;
 var maxResults = 10;
+
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
 var citiesRequest = new XMLHttpRequest();
 citiesRequest.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         getCities(this.responseText);
+    } else if (this.status > 299 && this.readyState == 4) {
+        showError("Błąd połączenia z bazą miast!");
     }
+};
+citiesRequest.onerror = function () {
+    showError("Błąd połączenia z bazą miast!")
 };
 checkStorage();
 
+function checkStorage() {
+    var theme = localStorage.getItem("theme");
+    var cityName = localStorage.getItem("name");
+    var lat = localStorage.getItem('lat');
+    var lng = localStorage.getItem('lng');
+
+    if (cityName == -1) {
+        getLocation();
+    } else if (cityName != null) {
+        loadCity(lat, lng, cityName);
+    } else {
+        showWelcome()
+    }
+
+    if (theme == null || theme == 'Light') {
+        document.documentElement.style.setProperty('--background', 'white');
+        document.getElementById("themeButton").src = "Icons/Moon.svg";
+    } else {
+        document.documentElement.style.setProperty('--background', 'black');
+        document.getElementById("themeButton").src = "Icons/Sun.svg";
+    }
+}
+
+window.addEventListener('resize', () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
 function getLocation() {
     if (navigator.geolocation) {
-        localStorage.setItem('name', -1);
-        document.getElementById("cityName").innerHTML = "Aktualne miejsce";
-        navigator.geolocation.getCurrentPosition(getWeather);
+        navigator.geolocation.getCurrentPosition(locationSuccess, locationFailure);
     } else {
-        alert('Ta przeglądarka nie wspiera Geolokalizacji!');
+        showError('Ta przeglądarka nie wspiera Geolokalizacji! Spróbuj ręcznie wpisać nazwę miejscowości.')
     }
+}
+
+function locationSuccess(position)
+{
+    localStorage.setItem('name', -1);
+    document.getElementById("cityName").innerHTML = "Aktualne miejsce";
+    getWeather(position);
+}
+
+function locationFailure()
+{
+    showError('Nie można otrzymać lokalizacji! Spróbuj ręcznie wpisać nazwę miejscowości.');
 }
 
 function switchTheme() {
@@ -104,7 +151,12 @@ function getWeather(position) {
     weatherRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             loadWeather(this.responseText);
+        } else if (this.status > 299 && this.readyState == 4) {
+            showError("Błąd połączenia ze serwerem pogody! Spróbuj ponownie później.");
         }
+    };
+    weatherRequest.onerror = function () {
+        showError("Błąd połączenia ze serwerem pogody! Spróbuj ponownie później.")
     };
     weatherRequest.open("GET", `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude=minutely,hourly,alerts&units=metric&lang=pl&appid=a599189cf2973ef94f4f439e2f79b198`, true);
     weatherRequest.send();
@@ -121,7 +173,7 @@ function loadWeather(responseText) {
     document.getElementById("sunrise").innerHTML = `${(sunrise.getHours()<10 ? '0'  : '') + sunrise.getHours()}:${(sunrise.getMinutes()<10 ? '0'  : '') + sunrise.getMinutes()}`;
     document.getElementById("sunset").innerHTML = `${(sunset.getHours()<10 ? '0'  : '') + sunset.getHours()}:${(sunset.getMinutes()<10 ? '0'  : '') + sunset.getMinutes()}`;
     document.getElementById("currentTemp").innerHTML = Math.round(weather.current.temp) + "°C";
-    document.getElementById("mainImage").onload = hideLoading();
+    document.getElementById("mainImage").onload = showWeather;
     document.getElementById("mainImage").src = `Icons/${weather.current.weather[0].icon}.svg`;
     document.getElementById("curTemp").innerHTML = Math.round(weather.current.feels_like) + "°C";
     document.getElementById("curHumi").innerHTML = weather.current.humidity + "%";
@@ -140,31 +192,6 @@ function loadWeather(responseText) {
         temps[index].innerHTML = Math.round(weather.daily[index + 1].temp.day) + "°";
     }
 
-}
-
-function checkStorage() {
-    var theme = localStorage.getItem("theme");
-    var cityName = localStorage.getItem("name");
-    var lat = localStorage.getItem('lat');
-    var lng = localStorage.getItem('lng');
-
-    if (cityName == -1) {
-        getLocation();
-        document.getElementById("welcome").style.display = "none";
-    } else if (cityName != null) {
-        loadCity(lat, lng, cityName);
-        document.getElementById("welcome").style.display = "none";
-    } else {
-        hideLoading();
-    }
-
-    if (theme == null || theme == 'Light') {
-        document.documentElement.style.setProperty('--background', 'white');
-        document.getElementById("themeButton").src = "Icons/Moon.svg";
-    } else {
-        document.documentElement.style.setProperty('--background', 'black');
-        document.getElementById("themeButton").src = "Icons/Sun.svg";
-    }
 }
 
 function removeDuplicates(arr) {
@@ -193,4 +220,26 @@ function hideLoading() {
     document.getElementById("loadingScreen").ontransitionend = function () {
         document.getElementById("loadingScreen").style.display = "none";
     };
+}
+
+function showWelcome() {
+    hideLoading();
+    document.getElementById("error").style.display = "none";
+    document.getElementById("welcome").style.display = "flex";
+    document.getElementById("weather").style.display = "none";
+}
+
+function showWeather() {
+    hideLoading();
+    document.getElementById("error").style.display = "none";
+    document.getElementById("welcome").style.display = "none";
+    document.getElementById("weather").style.display = "flex";
+}
+
+function showError(e) {
+    hideLoading();
+    document.getElementById("error").style.display = "flex";
+    document.getElementById("welcome").style.display = "none";
+    document.getElementById("weather").style.display = "none";
+    document.getElementById("errorMsg").innerHTML = e;
 }
