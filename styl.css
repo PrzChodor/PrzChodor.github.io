@@ -1,0 +1,314 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+* {
+    font-family: 'Roboto';
+}
+
+*:focus {
+    outline: none !important
+}
+
+:root {
+    --background: white;
+    --main: #4AC4ED;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--background);
+}
+
+#topBar {
+    display: flex;
+    align-items: center
+}
+
+#searchBar {
+    flex-grow: 1;
+    height: 5vmax;
+    font-size: 3vmax;
+    border: 0.4vmax solid var(--main);
+    color: var(--main);
+    border-radius: 360px;
+    background-image: url("Icons/Search.svg");
+    background-position: 1vh 0.75vmax;
+    background-size: 3.75vmax;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0px 2vmax 0px 5.75vmax;
+    vertical-align: top;
+    margin: 0px 1vmin 0px 1vmin;
+    min-width: 0px;
+}
+
+#searchResults {
+    position: absolute;
+    top: 9vmax;
+    left: 0px;
+    background-color: var(--main);
+    width: 100vw;
+    max-height: calc(100vh - 9vmax);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.topBarButton {
+    width: auto;
+    height: 5vmax;
+    cursor: pointer;
+}
+
+.result {
+    margin-bottom: 0.3vh;
+    padding: 2vh 2vw 2vh 2vw;
+    width: 100vw;
+    font-size: 3vmax;
+    background-color: var(--background);
+    color: var(--main);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.result>p {
+    flex-grow: 1;
+    margin-left: 2vmin;
+}
+
+.result>img {
+    width: auto;
+    height: 5vmax;
+}
+
+.result:last-of-type {
+    margin-bottom: 0px;
+}
+
+#welcome {
+    width: 100%;
+    height: calc(100vh - 9vmax);
+    display: flex;
+    background-color: var(--background);
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#welcome>div {
+    color: var(--main);
+    text-align: center;
+}
+
+#welcome>div>h2 {
+    font-size: 6vmax;
+    margin: 1vmax;
+}
+
+#welcome>div>p {
+    font-size: 3vmax;
+    margin: 1vmax;
+}
+
+#welcome>img {
+    margin: 0px auto;
+    width: 40vmin;
+}
+
+#weather {
+    width: 100%;
+    height: calc(100vh - 9vmax);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#sunTime {
+    margin-top: 2vh;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--main);
+    font-size: 2.3vh;
+}
+
+#sunTime>img {
+    height: 2.3vh;
+}
+
+#sunTime>p {
+    margin: 0px;
+}
+
+#cityName {
+    color: var(--main);
+    margin: 0px;
+    margin-top: 2vh;
+    font-weight: normal;
+    font-size: 6vh;
+}
+
+#mainWeather {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    color: var(--main);
+    font-size: 12vmax;
+}
+
+#currentTemp {
+    margin: 0px;
+}
+
+#mainImage {
+    margin: 0px;
+    margin-right: 3vw;
+    width: 45%;
+}
+
+#weatherData {
+    margin-top: 2vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#weatherData>div {
+    margin: 1vmin;
+    border: 0.7vw solid var(--main);
+    border-radius: 4vmin;
+    width: 29%;
+    height: 14vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: var(--main);
+    font-size: 2.3vh;
+}
+
+#weatherData img {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    height: 4vh;
+}
+
+#weatherData p {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    font-weight: bold;
+    font-size: 3vh;
+}
+
+#nextDays {
+    margin-top: 4vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    color: var(--main);
+}
+
+.date {
+    margin: 0px;
+    font-size: 3vh;
+    text-align: center;
+}
+
+.weatherIcon {
+    display: flex;
+    flex-direction: column;
+}
+
+.temp {
+    font-size: 4vh;
+    margin: 0px;
+    text-align: center;
+}
+
+#nextDays img {
+    height: 7vh;
+}
+
+#line {
+    border-left: 0.3vw solid var(--main);
+    height: 2vh;
+}
+
+#loadingScreen {
+    position: absolute;
+    top: 9vmax;
+    left: 0px;
+    background-color: var(--background);
+    width: 100%;
+    height: calc(100vh - 9vmax);
+}
+
+#loading {
+    width: 60vmin;
+    height: 60vmin;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-animation: rotate-center 0.6s ease-in-out infinite both;
+    animation: rotate-center 0.6s ease-in-out infinite both;
+}
+
+::placeholder {
+    color: var(--main);
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: var(--main);
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--main);
+}
+
+@keyframes rotate-center {
+    0% {
+        -webkit-transform: translate(-50%, -50%) rotate(0);
+        transform: translate(-50%, -50%) rotate(0);
+    }
+    100% {
+        -webkit-transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@media (orientation: landscape) {
+    #welcome {
+        align-items: center;
+        align-content: center;
+        flex-direction: row;
+    }
+    #welcome>img {
+        margin: 0px 1vw;
+        width: 40vmin;
+    }
+    #welcome>div {
+        flex-grow: 1;
+    }
+}

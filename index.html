@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+
+<head>
+    <meta name="author" content="Przemysław Chodór">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <title>Aplikacja Pogodowa</title>
+    <meta name="Description" content="Aplikacja Pogodowa" />
+    <link href="styl.css" rel="stylesheet" />
+    <link rel="icon" href="Icons/02d.svg">
+</head>
+
+<body>
+    <div id="topBar">
+        <img src="Icons/Moon.svg" onclick="switchTheme()" class="topBarButton" id="themeButton">
+        <input type="text" id="searchBar" onkeyup="searchCity()" placeholder="Szukaj miasta">
+        <img src="Icons/Place.svg" onclick="getLocation()" class="topBarButton" >
+    </div>
+    <div id="welcome">
+        <img src="Icons/02d.svg">
+        <div>
+            <h2>Witamy!</h2>
+            <p>Aby skorzystać z aplikacji wpisz nazwę poszukiwanego miasta lub naciśnij przycisk lokalizacji w prawym górnym rogu.</p>
+        </div>
+    </div>
+    <div id="weather">
+        <div id="sunTime">
+            <img src="Icons/Sun.svg">
+            <p id="sunrise">06:20</p>
+            <div id="line"></div>
+            <img src="Icons/Moon.svg">
+            <p id="sunset">18:30</p>
+        </div>
+        <h1 id="cityName">Zwierzyniec</h1>
+        <div id="mainWeather">
+            <img id="mainImage" src="Icons/02d.svg">
+            <p id="currentTemp">15°C</p>
+        </div>
+        <div id="weatherData">
+            <div>
+                <img src="Icons/Thermostat.svg">
+                Odczuwalna
+                <p id="curTemp">15°C</p>
+            </div>
+            <div>
+                <img src="Icons/Humidity.svg">
+                Wilgotność
+                <p id="curHumi">86%</p>
+            </div>
+            <div>
+                <img src="Icons/Sun.svg">
+                UV
+                <p id="curUV">2</p>
+            </div>
+            <div>
+                <img src="Icons/Clouds.svg">
+                Zachmurzenie
+                <p id="curClou">15km</p>
+            </div>
+            <div>
+                <img src="Icons/Pressure.svg">
+                Ciśnienie
+                <p id="curPres">1012 hPa</p>
+            </div>
+            <div>
+                <img src="Icons/Wind.svg">
+                Wiatr
+                <p id="curWind">3.64 m/s</p>
+            </div>
+        </div>
+        <div id="nextDays">
+            <div>
+                <p class="date">20.01</p>
+                <img class="weatherIcon" src="Icons/01d.svg">
+                <p class="temp">15°</p>
+            </div>
+            <div>
+                <p class="date">20.01</p>
+                <img class="weatherIcon" src="Icons/01d.svg">
+                <p class="temp">15°</p>
+            </div>
+            <div>
+                <p class="date">20.01</p>
+                <img class="weatherIcon" src="Icons/01d.svg">
+                <p class="temp">15°</p>
+            </div>
+            <div>
+                <p class="date">20.01</p>
+                <img class="weatherIcon" src="Icons/01d.svg">
+                <p class="temp">15°</p>
+            </div>
+            <div>
+                <p class="date">20.01</p>
+                <img class="weatherIcon" src="Icons/01d.svg">
+                <p class="temp">15°</p>
+            </div>
+        </div>
+    </div>
+    <div id="searchResults" style="z-index: 1;"></div>
+    <div id="loadingScreen" style="z-index: 2;">
+        <img src="Icons/Loading.svg" id="loading">
+    </div>
+    <script src="skrypt.js "></script> 
+</body>
+
+</html>
