@@ -5,6 +5,11 @@ var maxResults = 10;
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
+window.addEventListener('resize', () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
 var citiesRequest = new XMLHttpRequest();
 citiesRequest.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -43,11 +48,6 @@ function checkStorage() {
     }
 }
 
-window.addEventListener('resize', () => {
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
-
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(locationSuccess, locationFailure);
@@ -56,15 +56,13 @@ function getLocation() {
     }
 }
 
-function locationSuccess(position)
-{
+function locationSuccess(position) {
     localStorage.setItem('name', -1);
     document.getElementById("cityName").innerHTML = "Aktualne miejsce";
     getWeather(position);
 }
 
-function locationFailure()
-{
+function locationFailure() {
     showReloading();
     showError('Nie można otrzymać lokalizacji! Sprawdź czy jest włączona funkcja lokalizacji lub spróbuj ręcznie wpisać nazwę miejscowości.');
 }

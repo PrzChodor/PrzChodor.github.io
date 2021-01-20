@@ -15,7 +15,7 @@
 <body>
     <div id="topBar">
         <img src="Icons/Moon.svg" onclick="switchTheme()" class="topBarButton" id="themeButton">
-        <input type="text" id="searchBar" onkeyup="searchCity()" placeholder="Szukaj miasta">
+        <input type="text" id="searchBar" onkeyup="searchCity()" onfocusin="focusSearch()" onfocusout="unfocusSearch()" placeholder="Szukaj miasta">
         <img src="Icons/Place.svg" onclick="getLocation()" class="topBarButton" >
     </div>
     <div id="weather" class="slide-in-anim">
