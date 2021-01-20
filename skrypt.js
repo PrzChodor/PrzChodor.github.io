@@ -10,10 +10,12 @@ citiesRequest.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         getCities(this.responseText);
     } else if (this.status > 299 && this.readyState == 4) {
+        hideLoading();
         showError("Błąd połączenia z bazą miast!");
     }
 };
 citiesRequest.onerror = function () {
+    hideLoading();
     showError("Błąd połączenia z bazą miast!")
 };
 checkStorage();
@@ -63,7 +65,8 @@ function locationSuccess(position)
 
 function locationFailure()
 {
-    showError('Nie można otrzymać lokalizacji! Spróbuj ręcznie wpisać nazwę miejscowości.');
+    showReloading();
+    showError('Nie można otrzymać lokalizacji! Sprawdź czy jest włączona funkcja lokalizacji lub spróbuj ręcznie wpisać nazwę miejscowości.');
 }
 
 function switchTheme() {
@@ -152,10 +155,12 @@ function getWeather(position) {
         if (this.readyState == 4 && this.status == 200) {
             loadWeather(this.responseText);
         } else if (this.status > 299 && this.readyState == 4) {
+            hideLoading();
             showError("Błąd połączenia ze serwerem pogody! Spróbuj ponownie później.");
         }
     };
     weatherRequest.onerror = function () {
+        hideLoading();
         showError("Błąd połączenia ze serwerem pogody! Spróbuj ponownie później.")
     };
     weatherRequest.open("GET", `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude=minutely,hourly,alerts&units=metric&lang=pl&appid=a599189cf2973ef94f4f439e2f79b198`, true);
@@ -208,6 +213,11 @@ function removeDuplicates(arr) {
     return uniques;
 }
 
+function showReloading() {
+    showLoading();
+    setTimeout(hideLoading, 100);
+}
+
 function showLoading() {
     document.getElementById("loadingScreen").style.display = "initial";
     document.getElementById('loadingScreen').style.transition = "none";
@@ -224,22 +234,33 @@ function hideLoading() {
 
 function showWelcome() {
     hideLoading();
+    var element = document.getElementById("welcome");
+    element.style.display = "flex";
     document.getElementById("error").style.display = "none";
-    document.getElementById("welcome").style.display = "flex";
     document.getElementById("weather").style.display = "none";
+    element.classList.remove("slide-in-anim");
+    void element.offsetWidth;
+    element.classList.add("slide-in-anim");
 }
 
 function showWeather() {
     hideLoading();
+    var element = document.getElementById("weather");
+    element.style.display = "flex";
     document.getElementById("error").style.display = "none";
     document.getElementById("welcome").style.display = "none";
-    document.getElementById("weather").style.display = "flex";
+    element.classList.remove("slide-in-anim");
+    void element.offsetWidth;
+    element.classList.add("slide-in-anim");
 }
 
 function showError(e) {
-    hideLoading();
-    document.getElementById("error").style.display = "flex";
+    var element = document.getElementById("error");
+    element.style.display = "flex";
     document.getElementById("welcome").style.display = "none";
     document.getElementById("weather").style.display = "none";
     document.getElementById("errorMsg").innerHTML = e;
+    element.classList.remove("slide-in-anim");
+    void element.offsetWidth;
+    element.classList.add("slide-in-anim");
 }

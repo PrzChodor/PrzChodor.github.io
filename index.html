@@ -18,7 +18,7 @@
         <input type="text" id="searchBar" onkeyup="searchCity()" placeholder="Szukaj miasta">
         <img src="Icons/Place.svg" onclick="getLocation()" class="topBarButton" >
     </div>
-    <div id="weather">
+    <div id="weather" class="slide-in-anim">
         <div id="sunTime">
             <img src="Icons/Sun.svg">
             <p id="sunrise">06:20</p>
@@ -91,14 +91,14 @@
             </div>
         </div>
     </div>
-    <div id="error" class="message">
+    <div id="error" class="message slide-in-anim">
         <img src="Icons/Error.svg">
         <div>
             <h2>Błąd!</h2>
             <p id="errorMsg">Ta przeglądarka nie wspiera Geolokalizacji! Spróbuj ręcznie wpisać nazwę miejscowości.</p>
         </div>
     </div>
-    <div id="welcome" class="message">
+    <div id="welcome" class="message slide-in-anim">
         <img src="Icons/02d.svg">
         <div>
             <h2>Witamy!</h2>

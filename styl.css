@@ -47,7 +47,7 @@ html, body {
     left: 0px;
     background-color: var(--main);
     width: 100vw;
-    max-height: 91vh; 
+    max-height: 91vh;
     max-height: calc(var(--vh, 1vh) * 91);
     overflow-x: hidden;
     overflow-y: auto;
@@ -85,14 +85,18 @@ html, body {
     margin-bottom: 0px;
 }
 
+.slide-in-anim {
+    -webkit-animation: slide-in-bottom 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
 .message {
     width: 100%;
-    height: 91vh; 
+    height: 91vh;
     height: calc(var(--vh, 1vh) * 91);
     display: flex;
     background-color: var(--background);
-    align-items: flex-start;
-    align-content: flex-start;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
 }
@@ -110,6 +114,7 @@ html, body {
 .message>div>p {
     font-size: 3vmax;
     margin: 1vmax;
+    padding: 0px 5vw;
 }
 
 .message>img {
@@ -119,7 +124,8 @@ html, body {
 
 #weather {
     width: 100%;
-    height: calc(100vh - 9vmax);
+    height: 91vh;
+    height: calc(var(--vh, 1vh) * 91);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -300,17 +306,30 @@ html, body {
     }
 }
 
+@keyframes slide-in-bottom {
+    0% {
+        -webkit-transform: translateY(1000px);
+        transform: translateY(1000px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 @media (orientation: landscape) {
-    #welcome {
+    .message {
         align-items: center;
         align-content: center;
         flex-direction: row;
     }
-    #welcome>img {
+    .message>img {
         margin: 0px 1vw;
         width: 40vmin;
     }
-    #welcome>div {
+    .message>div {
         flex-grow: 1;
     }
 }
