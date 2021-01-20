@@ -109,10 +109,11 @@ function searchCity(event) {
         hideKeyboard();
         return;
     }
+    citiesRequest.abort();
+    hideLoading();
     var text = document.getElementById("searchBar").value;
     if (text.length > 2) {
         showLoading();
-        citiesRequest.abort();
         document.getElementById("searchResults").innerHTML = '';
         citiesRequest.open("GET", `https://secure.geonames.org/searchJSON?name_startsWith=${document.getElementById("searchBar").value}&style=LONG&maxRows=1000&orderby=population&username=przchodor`, true);
         citiesRequest.send();
