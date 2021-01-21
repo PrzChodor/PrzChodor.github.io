@@ -270,6 +270,7 @@ html, body {
 
 #loadingScreen {
     position: absolute;
+    left: 0;
     top: 6.8vh;
     top: calc(var(--vh, 1vh) * 6.8);
     background-color: var(--background);
@@ -457,15 +458,15 @@ html, body {
         height: calc(var(--vh, 1vh) * 8);
     }
     #searchResults {
-        top: 16.8vh;
-        top: calc(var(--vh, 1vh) * 16.8);
-        max-height: 83.2vh;
-        max-height: calc(var(--vh, 1vh) * 83.2);
-    }
-    #loadingScreen {
         top: 12.8vh;
         top: calc(var(--vh, 1vh) * 12.8);
         max-height: 87.2vh;
         max-height: calc(var(--vh, 1vh) * 87.2);
+    }
+    #loadingScreen {
+        top: 12.8vh;
+        top: calc(var(--vh, 1vh) * 12.8);
+        height: 87.2vh;
+        height: calc(var(--vh, 1vh) * 87.2);
     }
 }
