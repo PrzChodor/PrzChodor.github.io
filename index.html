@@ -9,56 +9,78 @@
     <title>Aplikacja Pogodowa</title>
     <meta name="Description" content="Aplikacja Pogodowa" />
     <link href="styl.css" rel="stylesheet" />
-    <link rel="icon" href="Icons/02d.svg">
+    <link rel="icon" href="icon.svg">
 </head>
 
 <body>
     <div id="topBar">
-        <img src="Icons/Moon.svg" onclick="switchTheme()" class="topBarButton" id="themeButton">
+        <svg class="icon topBarButton" onclick="showThemeSelection()">
+            <use href="icons.svg#icon-Theme"></use>
+        </svg>
         <input type="text" id="searchBar" onkeyup="searchCity(event)" placeholder="Szukaj miasta">
-        <img src="Icons/Place.svg" onclick="getLocation()" class="topBarButton">
+        <svg class="icon topBarButton" onclick="getLocation()">
+            <use href="icons.svg#icon-Place"></use>
+        </svg>
     </div>
     <div id="weather" class="slide-in-anim">
         <div id="sunTime">
-            <img src="Icons/Sun.svg">
+            <svg class="icon">
+                <use href="icons.svg#icon-Sun"></use>
+            </svg>
             <p id="sunrise">06:20</p>
             <div id="line"></div>
-            <img src="Icons/Moon.svg">
+            <svg class="icon">
+                <use href="icons.svg#icon-Moon"></use>
+            </svg>
             <p id="sunset">18:30</p>
         </div>
         <h1 id="cityName">Zwierzyniec</h1>
         <div id="mainWeather">
-            <img id="mainImage" src="Icons/02d.svg">
+            <svg class="icon" id="mainImage">
+                <use href="icons.svg#icon-02d"></use>
+            </svg>
             <p id="currentTemp">15°C</p>
         </div>
         <div id="weatherData">
             <div>
-                <img src="Icons/Thermostat.svg">
+                <svg class="icon">
+                    <use href="icons.svg#icon-Thermostat"></use>
+                </svg>
                 Odczuwalna
                 <p id="curTemp">15°C</p>
             </div>
             <div>
-                <img src="Icons/Humidity.svg">
+                <svg class="icon">
+                    <use href="icons.svg#icon-Humidity"></use>
+                </svg>
                 Wilgotność
                 <p id="curHumi">86%</p>
             </div>
             <div>
-                <img src="Icons/Sun.svg">
+                <svg class="icon">
+                    <use href="icons.svg#icon-Sun"></use>
+                </svg>
                 UV
                 <p id="curUV">2</p>
             </div>
             <div>
-                <img src="Icons/Clouds.svg">
+                <svg class="icon">
+                    <use href="icons.svg#icon-Clouds"></use>
+                </svg>
                 Zachmurzenie
                 <p id="curClou">15km</p>
             </div>
             <div>
-                <img src="Icons/Pressure.svg">
+                <svg class="icon">
+                    <use href="icons.svg#icon-Pressure"></use>
+                </svg>
                 Ciśnienie
                 <p id="curPres">1012 hPa</p>
             </div>
             <div>
-                <img src="Icons/Wind.svg">
+                <svg class="icon">
+                    <use href="icons.svg#icon-Wind"></use>
+                </svg>
                 Wiatr
                 <p id="curWind">3.64 m/s</p>
             </div>
@@ -66,40 +88,54 @@
         <div id="nextDays">
             <div>
                 <p class="date">20.01</p>
-                <img class="weatherIcon" src="Icons/01d.svg">
+                <svg class="icon weatherIcon">
+                    <use href="icons.svg#icon-01d"></use>
+                </svg>
                 <p class="temp">15°</p>
             </div>
             <div>
                 <p class="date">20.01</p>
-                <img class="weatherIcon" src="Icons/01d.svg">
+                <svg class="icon weatherIcon">
+                    <use href="icons.svg#icon-01d"></use>
+                </svg>
                 <p class="temp">15°</p>
             </div>
             <div>
                 <p class="date">20.01</p>
-                <img class="weatherIcon" src="Icons/01d.svg">
+                <svg class="icon weatherIcon">
+                    <use href="icons.svg#icon-01d"></use>
+                </svg>
                 <p class="temp">15°</p>
             </div>
             <div>
                 <p class="date">20.01</p>
-                <img class="weatherIcon" src="Icons/01d.svg">
+                <svg class="icon weatherIcon">
+                    <use href="icons.svg#icon-01d"></use>
+                </svg>
                 <p class="temp">15°</p>
             </div>
             <div>
                 <p class="date">20.01</p>
-                <img class="weatherIcon" src="Icons/01d.svg">
+                <svg class="icon weatherIcon">
+                    <use href="icons.svg#icon-01d"></use>
+                </svg>
                 <p class="temp">15°</p>
             </div>
         </div>
     </div>
     <div id="error" class="message slide-in-anim">
-        <img src="Icons/Error.svg">
+        <svg class="icon">
+            <use href="icons.svg#icon-Error"></use>
+        </svg>
         <div>
             <h2>Błąd!</h2>
             <p id="errorMsg">Ta przeglądarka nie wspiera Geolokalizacji! Spróbuj ręcznie wpisać nazwę miejscowości.</p>
         </div>
     </div>
     <div id="welcome" class="message slide-in-anim">
-        <img src="Icons/02d.svg">
+        <svg class="icon">
+            <use href="icons.svg#icon-02d"></use>
+        </svg>
         <div>
             <h2>Witamy!</h2>
             <p>Aby skorzystać z aplikacji wpisz nazwę poszukiwanego miasta lub naciśnij przycisk lokalizacji w prawym
@@ -107,8 +143,36 @@
         </div>
     </div>
     <div id="searchResults" style="z-index: 1;"></div>
-    <<div id="loadingScreen" style="z-index: 2;">
-        <img src="Icons/Loading.svg" id="loading">
+    <div id="loadingScreen" style="z-index: 2;">
+        <svg class="icon" id="loading">
+            <use href="icons.svg#icon-Loading"></use>
+        </svg>
+    </div>
+    <div id="themeSelection" style="z-index: 3;">
+        <div onclick="changeTheme('#F8D242','#292825')" style="background-color: #F8D242;">
+            <div style="color: #F8D242; background-color: #292825;">Ab</div>
+        </div>
+        <div onclick="changeTheme('#FAD644','#2B3252')" style="background-color: #FAD644;">
+            <div style="color: #FAD644; background-color: #2B3252;">Ab</div>
+        </div>
+        <div onclick="changeTheme('#F4A950','#161B21')" style="background-color: #F4A950;">
+            <div style="color: #F4A950; background-color: #161B21;">Ab</div>
+        </div>
+        <div onclick="changeTheme('#F1F3F4','#083045')" style="background-color: #F1F3F4;">
+            <div style="color: #F1F3F4; background-color: #083045;">Ab</div>
+        </div>
+        <div onclick="changeTheme('#222222','#FFE66B')" style="background-color: #222222;">
+            <div style="color: #222222; background-color: #FFE66B;">Ab</div>
+        </div>
+        <div onclick="changeTheme('#2E3C7D','#ECECEC')" style="background-color: #2E3C7D;">
+            <div style="color: #2E3C7D; background-color: #ECECEC;">Ab</div>
+        </div>
+        <div onclick="changeTheme('#262223','#DDC6B6')" style="background-color: #262223;">
+            <div style="color: #262223; background-color: #DDC6B6;">Ab</div>
+        </div>
+        <div onclick="changeTheme('#990011','#FCF6F5')" style="background-color: #990011;">
+            <div style="color: #990011; background-color: #FCF6F5;">Ab</div>
+        </div>
     </div>
     <script src="skrypt.js "></script>
 </body>

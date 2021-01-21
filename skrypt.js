@@ -29,10 +29,11 @@ citiesRequest.onerror = function () {
     hideLoading();
     showError("Błąd połączenia z bazą miast! Spróbuj ponownie później.")
 };
+
+document.getElementById("themeSelection").style.display = "none";
 checkStorage();
 
 function checkStorage() {
-    var theme = localStorage.getItem("theme");
     var cityName = localStorage.getItem("name");
     var lat = localStorage.getItem('lat');
     var lng = localStorage.getItem('lng');
@@ -45,12 +46,13 @@ function checkStorage() {
         showWelcome();
     }
 
-    if (theme == null || theme == 'Light') {
-        document.documentElement.style.setProperty('--background', 'white');
-        document.getElementById("themeButton").src = "Icons/Moon.svg";
-    } else {
-        document.documentElement.style.setProperty('--background', 'black');
-        document.getElementById("themeButton").src = "Icons/Sun.svg";
+    var foreground = localStorage.getItem("foreground");
+    var background = localStorage.getItem("background");
+
+    if (foreground != null && background != null)
+    {
+        document.documentElement.style.setProperty('--foreground', foreground);
+        document.documentElement.style.setProperty('--background', background);
     }
 }
 
@@ -73,17 +75,6 @@ function locationFailure() {
     showError('Nie można otrzymać lokalizacji! Sprawdź czy jest włączona funkcja lokalizacji lub spróbuj ręcznie wpisać nazwę miejscowości.');
 }
 
-function switchTheme() {
-    if (document.documentElement.style.getPropertyValue('--background') == 'white') {
-        document.getElementById("themeButton").src = "Icons/Sun.svg";
-        document.documentElement.style.setProperty('--background', 'black');
-        localStorage.setItem('theme', 'Dark');
-    } else {
-        document.getElementById("themeButton").src = "Icons/Moon.svg";
-        document.documentElement.style.setProperty('--background', 'white');
-        localStorage.setItem('theme', 'Light');
-    }
-}
 
 function getCities(responseText) {
     cities = JSON.parse(responseText);
@@ -92,9 +83,9 @@ function getCities(responseText) {
     i = 0;
     for (var city of cities.geonames) {
         if (city.adminName1 != "")
-            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><img src="Icons/Place.svg"><p>${city.name}, ${city.adminName1}, ${city.countryCode}</p></div>`;
+            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.adminName1}, ${city.countryCode}</p></div>`;
         else
-            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><img src="Icons/Place.svg"><p>${city.name}, ${city.countryCode}</p></div>`;
+            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.countryCode}</p></div>`;
         if (i == maxResults) {
             document.getElementById("searchResults").innerHTML += `<div class="result" id="loadMore" onclick="loadMore()">Wczytaj więcej...</div>`;
             break;
@@ -130,9 +121,9 @@ function loadMore() {
         let city = cities.geonames[j];
         console.log(cities.geonames.length);
         if (city.adminName1 != "")
-            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><img src="Icons/Place.svg"><p>${city.name}, ${city.adminName1}, ${city.countryCode}</p></div>`;
+            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.adminName1}, ${city.countryCode}</p></div>`;
         else
-            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><img src="Icons/Place.svg"><p>${city.name}, ${city.countryCode}</p></div>`;
+            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.countryCode}</p></div>`;
         if (j == i + maxResults) {
             document.getElementById("searchResults").innerHTML += `<div class="result" id="loadMore" onclick="loadMore()">Wczytaj więcej...</div>`;
             i += maxResults;
@@ -187,8 +178,7 @@ function loadWeather(responseText) {
     document.getElementById("sunrise").innerHTML = `${(sunrise.getHours()<10 ? '0'  : '') + sunrise.getHours()}:${(sunrise.getMinutes()<10 ? '0'  : '') + sunrise.getMinutes()}`;
     document.getElementById("sunset").innerHTML = `${(sunset.getHours()<10 ? '0'  : '') + sunset.getHours()}:${(sunset.getMinutes()<10 ? '0'  : '') + sunset.getMinutes()}`;
     document.getElementById("currentTemp").innerHTML = Math.round(weather.current.temp) + "°C";
-    document.getElementById("mainImage").onload = showWeather;
-    document.getElementById("mainImage").src = `Icons/${weather.current.weather[0].icon}.svg`;
+    document.getElementById("mainImage").innerHTML = `<use xlink:href="icons.svg#icon-${weather.current.weather[0].icon}"></use>`;
     document.getElementById("curTemp").innerHTML = Math.round(weather.current.feels_like) + "°C";
     document.getElementById("curHumi").innerHTML = weather.current.humidity + "%";
     document.getElementById("curUV").innerHTML = Math.round(weather.current.uvi);
@@ -202,10 +192,11 @@ function loadWeather(responseText) {
     for (let index = 0; index < 5; index++) {
         var date = new Date((weather.daily[index + 1].dt + weather.timezone_offset) * 1000);
         dates[index].innerHTML = `${(date.getUTCDate()<10 ? '0'  : '') + date.getUTCDate()}.${(date.getUTCMonth() + 1 < 10 ? '0'  : '') + (date.getUTCMonth() + 1)}`;
-        icons[index].src = `Icons/${weather.daily[index + 1].weather[0].icon}.svg`;
+        icons[index].innerHTML = `<use xlink:href="icons.svg#icon-${weather.daily[index + 1].weather[0].icon}"></use>`;
         temps[index].innerHTML = Math.round(weather.daily[index + 1].temp.day) + "°";
     }
 
+    showWeather();
 }
 
 function removeDuplicates(arr) {
@@ -253,7 +244,6 @@ function showWelcome() {
 }
 
 function showWeather() {
-    hideLoading();
     var element = document.getElementById("weather");
     element.style.display = "flex";
     document.getElementById("error").style.display = "none";
@@ -261,6 +251,39 @@ function showWeather() {
     element.classList.remove("slide-in-anim");
     void element.offsetWidth;
     element.classList.add("slide-in-anim");
+    hideLoading();
+}
+
+function showThemeSelection() {
+    var element = document.getElementById("themeSelection");
+    element.style.display = "grid";
+    element.classList.remove("slide-in-anim");
+    void element.offsetWidth;
+    element.classList.add("slide-in-anim");
+
+    setTimeout(function () {
+        element.classList.remove("slide-in-anim");
+    }, 1000);
+}
+
+function hideThemeSelection() {
+    var element = document.getElementById("themeSelection");
+    element.classList.remove("slide-out-top");
+    void element.offsetWidth;
+    element.classList.add("slide-out-top");
+
+    setTimeout(function () {
+        element.style.display = "none";
+        element.classList.remove("slide-out-top");
+    }, 500);
+}
+
+function changeTheme(foreground, background) {
+    document.documentElement.style.setProperty('--foreground', foreground);
+    document.documentElement.style.setProperty('--background', background);
+    localStorage.setItem('foreground', foreground);
+    localStorage.setItem('background', background);
+    hideThemeSelection();
 }
 
 function showError(e) {

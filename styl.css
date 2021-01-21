@@ -8,14 +8,24 @@
 }
 
 :root {
-    --background: white;
-    --main: #4AC4ED;
+    --background: #292825;
+    --foreground: #F8D242;
 }
 
 html, body {
     overflow: hidden;
     background-color: var(--background);
     margin: 0px;
+}
+
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+    color: var(--foreground);
 }
 
 #topBar {
@@ -31,19 +41,12 @@ html, body {
     height: calc(var(--vh, 1vh) * 5);
     font-size: 3vh;
     font-size: calc(var(--vh, 1vh) * 3);
-    border: 0.4vh solid var(--main);
-    border: calc(var(--vh, 1vh) * 0.4) solid var(--main);
-    color: var(--main);
+    border: 0.4vh solid var(--foreground);
+    border: calc(var(--vh, 1vh) * 0.4) solid var(--foreground);
+    color: var(--foreground);
     border-radius: 360px;
-    background-image: url("Icons/Search.svg");
-    background-position: 1vh 0.75vh;
-    background-position: calc(var(--vh, 1vh) * 1) calc(var(--vh, 1vh) * 0.75);
-    background-size: 3.75vh;
-    background-size: calc(var(--vh, 1vh) * 3.75);
-    background-repeat: no-repeat;
     background-color: rgba(0, 0, 0, 0);
-    padding: 0px 2vw 0px 5.75vh;
-    padding: 0px 2vw 0px calc(var(--vh, 1vh) * 5.75);
+    padding: 0px 4vw;
     min-width: 0px;
     margin: 0px 2vw;
 }
@@ -51,16 +54,18 @@ html, body {
 .topBarButton {
     height: 5vh;
     height: calc(var(--vh, 1vh) * 5);
+    width: 5vh;
+    width: calc(var(--vh, 1vh) * 5);
     cursor: pointer;
 }
 
 #searchResults {
     position: absolute;
-    top: 6.8vh;
-    top: calc(var(--vh, 1vh) * 6.8);
+    top: 7.8vh;
+    top: calc(var(--vh, 1vh) * 7.8);
     width: 100vw;
-    max-height: 93.2vh;
-    max-height: calc(var(--vh, 1vh) * 93.2);
+    max-height: 92.2vh;
+    max-height: calc(var(--vh, 1vh) * 92.2);
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -72,7 +77,7 @@ html, body {
     font-size: 3vh;
     font-size: calc(var(--vh, 1vh) * 3);
     background-color: var(--background);
-    color: var(--main);
+    color: var(--foreground);
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -83,14 +88,11 @@ html, body {
     margin: 0px 2vw;
 }
 
-.result>img {
+.result>svg {
     height: 5vh;
     height: calc(var(--vh, 1vh) * 5);
-}
-
-.slide-in-anim {
-    -webkit-animation: slide-in-bottom 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    width: 5vh;
+    width: calc(var(--vh, 1vh) * 5);
 }
 
 .message {
@@ -105,7 +107,7 @@ html, body {
 }
 
 .message>div {
-    color: var(--main);
+    color: var(--foreground);
     text-align: center;
 }
 
@@ -120,9 +122,10 @@ html, body {
     padding: 0px 5vw;
 }
 
-.message>img {
-    margin: 0px auto;
+.message>svg {
+    height: 40vmin;
     width: 40vmin;
+    margin: 0px auto;
 }
 
 #weather {
@@ -142,29 +145,31 @@ html, body {
     align-items: center;
     flex-direction: row;
     justify-content: space-evenly;
-    color: var(--main);
+    color: var(--foreground);
     font-size: 3vh;
     font-size: calc(var(--vh, 1vh) * 3);
-}
-
-#sunTime>img {
-    height: 3vh;
-    height: calc(var(--vh, 1vh) * 3);
 }
 
 #sunTime>p {
     margin: 0px;
 }
 
+#sunTime>svg {
+    height: 3vh;
+    height: calc(var(--vh, 1vh) * 3);
+    width: 3vh;
+    width: calc(var(--vh, 1vh) * 3);
+}
+
 #line {
-    border-left: 0.4vh solid var(--main);
-    border-left: calc(var(--vh, 1vh) * 0.4) solid var(--main);
+    border-left: 0.4vh solid var(--foreground);
+    border-left: calc(var(--vh, 1vh) * 0.4) solid var(--foreground);
     height: 2.5vh;
     height: calc(var(--vh, 1vh) * 2.5);
 }
 
 #cityName {
-    color: var(--main);
+    color: var(--foreground);
     margin: 0px;
     font-weight: normal;
     white-space: nowrap;
@@ -179,7 +184,7 @@ html, body {
     align-items: center;
     flex-direction: row;
     justify-content: center;
-    color: var(--main);
+    color: var(--foreground);
     font-size: 10vh;
     font-size: calc(var(--vh, 1vh) * 10);
 }
@@ -191,6 +196,8 @@ html, body {
 #mainImage {
     margin: 0px;
     margin-right: 5vw;
+    height: 12vh;
+    height: calc(var(--vh, 1vh) * 12);
     width: 12vh;
     width: calc(var(--vh, 1vh) * 12);
 }
@@ -208,8 +215,8 @@ html, body {
 }
 
 #weatherData>div {
-    border: 0.4vh solid var(--main);
-    border: calc(var(--vh, 1vh) * 0.4) solid var(--main);
+    border: 0.4vh solid var(--foreground);
+    border: calc(var(--vh, 1vh) * 0.4) solid var(--foreground);
     border-radius: 4vmin;
     width: 30%;
     height: 14vh;
@@ -218,14 +225,16 @@ html, body {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    color: var(--main);
+    color: var(--foreground);
     font-size: 4vw;
 }
 
-#weatherData img {
+#weatherData svg {
     margin: 0px;
     height: 3vh;
     height: calc(var(--vh, 1vh) * 3);
+    width: 3vh;
+    width: calc(var(--vh, 1vh) * 3);
 }
 
 #weatherData p {
@@ -239,7 +248,7 @@ html, body {
     align-items: center;
     flex-direction: row;
     justify-content: space-evenly;
-    color: var(--main);
+    color: var(--foreground);
 }
 
 #nextDays>div {
@@ -259,6 +268,8 @@ html, body {
     margin: 0px;
     height: 7vh;
     height: calc(var(--vh, 1vh) * 7);
+    width: 7vh;
+    width: calc(var(--vh, 1vh) * 7);
 }
 
 .temp {
@@ -270,7 +281,6 @@ html, body {
 
 #loadingScreen {
     position: absolute;
-    left: 0;
     top: 6.8vh;
     top: calc(var(--vh, 1vh) * 6.8);
     background-color: var(--background);
@@ -280,8 +290,8 @@ html, body {
 }
 
 #loading {
-    width: 60vmin;
     height: 60vmin;
+    width: 60vmin;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -289,13 +299,58 @@ html, body {
     animation: rotate-center 0.6s ease-in-out infinite both;
 }
 
+#themeSelection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 96vh;
+    height: calc(var(--vh, 1vh) * 96);
+    width: 96vw;
+    background-color: var(--background);
+    display: grid;
+    row-gap: 2vh;
+    column-gap: 2vw;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2vh 2vw;
+    padding: calc(var(--vh, 1vh) * 2) 2vw;
+}
+
+#themeSelection>div {
+    justify-self: center;
+    background-color: var(--foreground);
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--foreground);
+    height: min(22.5vh, 47vw);
+    height: min(calc(var(--vh, 1vh) * 22.5), 47vw);
+    width: min(22.5vh, 47vw);
+    width: min(calc(var(--vh, 1vh) * 22.5), 47vw);
+    border-radius: 5.5vmin;
+    cursor: pointer;
+}
+
+#themeSelection>div div {
+    height: 85%;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background);
+    border-radius: 3.5vmin;
+    color: var(--foreground);
+    font-size: min(11.25vh, 23.5vw);
+    font-size: min(calc(var(--vh, 1vh) * 11.25), 23.5vw);
+}
+
 ::placeholder {
-    color: var(--main);
+    color: var(--foreground);
     opacity: 1;
 }
 
 :-ms-input-placeholder {
-    color: var(--main);
+    color: var(--foreground);
 }
 
 *::-webkit-scrollbar {
@@ -307,7 +362,17 @@ html, body {
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: var(--main);
+    background-color: var(--foreground);
+}
+
+.slide-in-anim {
+    -webkit-animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.slide-out-top {
+    -webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 @keyframes rotate-center {
@@ -334,6 +399,32 @@ html, body {
     }
 }
 
+@-webkit-keyframes slide-out-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translateY(-1000px);
+        transform: translateY(-1000px);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-out-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translateY(-1000px);
+        transform: translateY(-1000px);
+        opacity: 0;
+    }
+}
+
 @media screen and (min-device-aspect-ratio: 1/1) and (orientation: landscape) {
     .message {
         max-height: 87.2vh;
@@ -343,10 +434,6 @@ html, body {
         align-items: center;
         align-content: center;
         flex-direction: row;
-    }
-    .message>img {
-        margin: 0px 1vw;
-        width: 40vmin;
     }
     .message>div {
         flex-grow: 1;
@@ -364,9 +451,11 @@ html, body {
         font-size: 5h;
         font-size: calc(var(--vh, 1vh) * 5);
     }
-    #sunTime>img {
+    #sunTime>svg {
         height: 5vh;
         height: calc(var(--vh, 1vh) * 5);
+        width: 5vh;
+        width: calc(var(--vh, 1vh) * 5);
     }
     #line {
         height: 4vh;
@@ -385,10 +474,13 @@ html, body {
         width: 40%;
         display: flex;
         flex-direction: column;
-        color: var(--main);
+        color: var(--foreground);
     }
     #mainImage {
         margin: 0px;
+        height: 30vh;
+        height: calc(var(--vh, 1vh) * 30);
+        width: 30vh;
         width: calc(var(--vh, 1vh) * 30);
     }
     #weatherData {
@@ -401,8 +493,11 @@ html, body {
         height: calc(var(--vh, 1vh) * 25);
         font-size: 2vw;
     }
-    #weatherData img {
-        height: 4vw;
+    #weatherData svg {
+        height: 4vh;
+        height: calc(var(--vh, 1vh) * 4);
+        width: 4vh;
+        width: calc(var(--vh, 1vh) * 4);
     }
     #weatherData p {
         font-size: 2.5vw;
@@ -415,7 +510,7 @@ html, body {
         align-items: center;
         flex-direction: row;
         justify-content: space-evenly;
-        color: var(--main);
+        color: var(--foreground);
     }
     .date {
         font-size: 5vh;
@@ -424,6 +519,8 @@ html, body {
     .weatherIcon {
         height: 12vh;
         height: calc(var(--vh, 1vh) * 12);
+        width: 12vh;
+        width: calc(var(--vh, 1vh) * 12);
     }
     .temp {
         font-size: 5vh;
@@ -436,6 +533,8 @@ html, body {
     .result>img {
         height: 10vh;
         height: calc(var(--vh, 1vh) * 10);
+        width: 10vh;
+        width: calc(var(--vh, 1vh) * 10);
     }
     #topBar {
         margin: 4vh 2vw 0px 2vw;
@@ -446,27 +545,37 @@ html, body {
         height: calc(var(--vh, 1vh) * 8);
         font-size: 5vh;
         font-size: calc(var(--vh, 1vh) * 5);
-        background-position: 2vh 1vh;
-        background-position: calc(var(--vh, 1vh) * 2) calc(var(--vh, 1vh) * 1);
-        background-size: 6vh;
-        background-size: calc(var(--vh, 1vh) * 6);
-        padding: 0px 2vw 0px 9vh;
-        padding: 0px 2vw 0px calc(var(--vh, 1vh) * 9);
+        padding: 0px 4vw;
     }
     .topBarButton {
         height: 8vh;
         height: calc(var(--vh, 1vh) * 8);
+        width: 8vh;
+        width: calc(var(--vh, 1vh) * 8);
     }
     #searchResults {
+        top: 16.8vh;
+        top: calc(var(--vh, 1vh) * 16.8);
+        max-height: 83.2vh;
+        max-height: calc(var(--vh, 1vh) * 83.2);
+    }
+    #loadingScreen {
         top: 12.8vh;
         top: calc(var(--vh, 1vh) * 12.8);
         max-height: 87.2vh;
         max-height: calc(var(--vh, 1vh) * 87.2);
     }
-    #loadingScreen {
-        top: 12.8vh;
-        top: calc(var(--vh, 1vh) * 12.8);
-        height: 87.2vh;
-        height: calc(var(--vh, 1vh) * 87.2);
+    #themeSelection {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    #themeSelection>div {
+        height: min(47vh, 22.5vw);
+        width: min(calc(var(--vh, 1vh) * 47), 22.5vw);
+        height: min(47vh, 22.5vw);
+        width: min(calc(var(--vh, 1vh) * 47), 22.5vw);
+    }
+    #themeSelection>div div {
+        font-size: min(23.5vh, 11.25vw);
+        font-size: min(calc(var(--vh, 1vh) * 23.5), 11.25vw);
     }
 }
