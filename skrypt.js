@@ -13,6 +13,7 @@ window.addEventListener('resize', () => {
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
         lastAvailHeight = window.screen.availHeight;
+        setCellSize();
     }
 });
 
@@ -30,6 +31,7 @@ citiesRequest.onerror = function () {
     showError("Błąd połączenia z bazą miast! Spróbuj ponownie później.")
 };
 
+setCellSize();
 document.getElementById("themeSelection").style.display = "none";
 checkStorage();
 
@@ -49,8 +51,7 @@ function checkStorage() {
     var foreground = localStorage.getItem("foreground");
     var background = localStorage.getItem("background");
 
-    if (foreground != null && background != null)
-    {
+    if (foreground != null && background != null) {
         document.documentElement.style.setProperty('--foreground', foreground);
         document.documentElement.style.setProperty('--background', background);
     }
@@ -284,6 +285,23 @@ function changeTheme(foreground, background) {
     localStorage.setItem('foreground', foreground);
     localStorage.setItem('background', background);
     hideThemeSelection();
+}
+
+function setCellSize() {
+    var elementSize = 0;
+    if (window.innerHeight > window.innerWidth)
+        elementSize = Math.min(0.135 * window.innerHeight, 0.29 * window.innerWidth);
+    else
+        elementSize = Math.min(0.29 * window.innerHeight, 0.135 * window.innerWidth);
+
+    var themeSelectorCells = document.getElementById("themeSelection").children;
+    for (let index = 0; index < themeSelectorCells.length; index++) {
+        const element = themeSelectorCells[index];
+        console.log(element);
+        element.style.height = elementSize + "px";
+        element.style.width = elementSize + "px";
+        element.style.fontSize = 0.6 * elementSize + "px";
+    }
 }
 
 function showError(e) {

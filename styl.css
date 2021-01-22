@@ -15,7 +15,7 @@
 html, body {
     overflow: hidden;
     background-color: var(--background);
-    margin: 0px;
+    margin: 0;
 }
 
 .icon {
@@ -31,50 +31,41 @@ html, body {
 #topBar {
     display: flex;
     align-items: center;
-    margin: 1vh 2vw;
     margin: calc(var(--vh, 1vh)) 2vw;
 }
 
 #searchBar {
     flex-grow: 1;
-    height: 5vh;
     height: calc(var(--vh, 1vh) * 5);
-    font-size: 3vh;
     font-size: calc(var(--vh, 1vh) * 3);
     border: 0.4vh solid var(--foreground);
     border: calc(var(--vh, 1vh) * 0.4) solid var(--foreground);
     color: var(--foreground);
     border-radius: 360px;
     background-color: rgba(0, 0, 0, 0);
-    padding: 0px 4vw;
-    min-width: 0px;
-    margin: 0px 2vw;
+    padding: 0 4vw;
+    min-width: 0;
+    margin: 0 2vw;
 }
 
 .topBarButton {
-    height: 5vh;
     height: calc(var(--vh, 1vh) * 5);
-    width: 5vh;
     width: calc(var(--vh, 1vh) * 5);
     cursor: pointer;
 }
 
 #searchResults {
     position: absolute;
-    top: 7.8vh;
     top: calc(var(--vh, 1vh) * 7.8);
     width: 100vw;
-    max-height: 92.2vh;
     max-height: calc(var(--vh, 1vh) * 92.2);
     overflow-x: hidden;
     overflow-y: auto;
 }
 
 .result {
-    padding: 3vh 2vw;
     padding: calc(var(--vh, 1vh) * 3) 2vw;
     width: 100vw;
-    font-size: 3vh;
     font-size: calc(var(--vh, 1vh) * 3);
     background-color: var(--background);
     color: var(--foreground);
@@ -85,19 +76,16 @@ html, body {
 
 .result>p {
     flex-grow: 1;
-    margin: 0px 2vw;
+    margin: 0 2vw;
 }
 
 .result>svg {
-    height: 5vh;
     height: calc(var(--vh, 1vh) * 5);
-    width: 5vh;
     width: calc(var(--vh, 1vh) * 5);
 }
 
 .message {
     width: 100%;
-    height: 93.2vh;
     height: calc(var(--vh, 1vh) * 93.2);
     display: flex;
     background-color: var(--background);
@@ -119,18 +107,17 @@ html, body {
 .message>div>p {
     font-size: 3vmax;
     margin: 1vmax;
-    padding: 0px 5vw;
+    padding: 0 5vw;
 }
 
 .message>svg {
     height: 40vmin;
     width: 40vmin;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 #weather {
-    margin: calc(var(--vh, 1vh) * 2) 0px;
-    height: 89.2vh;
+    margin: calc(var(--vh, 1vh) * 2) 0;
     height: calc(var(--vh, 1vh) * 89.2);
     display: flex;
     align-items: center;
@@ -139,42 +126,37 @@ html, body {
 }
 
 #sunTime {
-    margin: 0px;
+    margin: 0;
     width: 70%;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-evenly;
     color: var(--foreground);
-    font-size: 3vh;
     font-size: calc(var(--vh, 1vh) * 3);
 }
 
 #sunTime>p {
-    margin: 0px;
+    margin: 0;
 }
 
 #sunTime>svg {
-    height: 3vh;
     height: calc(var(--vh, 1vh) * 3);
-    width: 3vh;
     width: calc(var(--vh, 1vh) * 3);
 }
 
 #line {
     border-left: 0.4vh solid var(--foreground);
     border-left: calc(var(--vh, 1vh) * 0.4) solid var(--foreground);
-    height: 2.5vh;
     height: calc(var(--vh, 1vh) * 2.5);
 }
 
 #cityName {
     color: var(--foreground);
-    margin: 0px;
+    margin: 0;
     font-weight: normal;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 6vh;
     font-size: calc(var(--vh, 1vh) * 6);
 }
 
@@ -185,26 +167,22 @@ html, body {
     flex-direction: row;
     justify-content: center;
     color: var(--foreground);
-    font-size: 10vh;
     font-size: calc(var(--vh, 1vh) * 10);
 }
 
 #currentTemp {
-    margin: 0px;
+    margin: 0;
 }
 
 #mainImage {
-    margin: 0px;
+    margin: 0;
     margin-right: 5vw;
-    height: 12vh;
     height: calc(var(--vh, 1vh) * 12);
-    width: 12vh;
     width: calc(var(--vh, 1vh) * 12);
 }
 
 #weatherData {
     width: 100%;
-    height: 32vh;
     height: calc(var(--vh, 1vh) * 32);
     display: flex;
     align-items: center;
@@ -215,11 +193,9 @@ html, body {
 }
 
 #weatherData>div {
-    border: 0.4vh solid var(--foreground);
     border: calc(var(--vh, 1vh) * 0.4) solid var(--foreground);
     border-radius: 4vmin;
     width: 30%;
-    height: 14vh;
     height: calc(var(--vh, 1vh) * 14);
     display: flex;
     align-items: center;
@@ -230,15 +206,13 @@ html, body {
 }
 
 #weatherData svg {
-    margin: 0px;
-    height: 3vh;
+    margin: 0;
     height: calc(var(--vh, 1vh) * 3);
-    width: 3vh;
     width: calc(var(--vh, 1vh) * 3);
 }
 
 #weatherData p {
-    margin: 0px;
+    margin: 0;
     font-size: 4vw;
 }
 
@@ -258,34 +232,28 @@ html, body {
 }
 
 .date {
-    margin: 0px;
-    font-size: 3vh;
+    margin: 0;
     font-size: calc(var(--vh, 1vh) * 3);
     text-align: center;
 }
 
 .weatherIcon {
-    margin: 0px;
-    height: 7vh;
+    margin: 0;
     height: calc(var(--vh, 1vh) * 7);
-    width: 7vh;
     width: calc(var(--vh, 1vh) * 7);
 }
 
 .temp {
-    font-size: 3vh;
     font-size: calc(var(--vh, 1vh) * 3);
-    margin: 0px;
+    margin: 0;
     text-align: center;
 }
 
 #loadingScreen {
     position: absolute;
-    top: 6.8vh;
     top: calc(var(--vh, 1vh) * 6.8);
     background-color: var(--background);
     width: 100vw;
-    height: 93.2vh;
     height: calc(var(--vh, 1vh) * 93.2);
 }
 
@@ -303,16 +271,15 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    height: 96vh;
-    height: calc(var(--vh, 1vh) * 96);
-    width: 96vw;
     background-color: var(--background);
-    display: grid;
-    row-gap: 2vh;
-    column-gap: 2vw;
     grid-template-columns: repeat(2, 1fr);
-    padding: 2vh 2vw;
-    padding: calc(var(--vh, 1vh) * 2) 2vw;
+    height: calc(var(--vh, 1vh) * 60);
+    width: 60vw;
+    display: grid;
+    row-gap: calc(var(--vh, 1vh) * 2);
+    column-gap: 2vw;
+    padding: calc(var(--vh, 1vh) * 20) 20vw;
+    cursor: pointer;
 }
 
 #themeSelection>div {
@@ -323,12 +290,7 @@ html, body {
     align-items: center;
     justify-content: center;
     color: var(--foreground);
-    height: min(22.5vh, 47vw);
-    height: min(calc(var(--vh, 1vh) * 22.5), 47vw);
-    width: min(22.5vh, 47vw);
-    width: min(calc(var(--vh, 1vh) * 22.5), 47vw);
-    border-radius: 5.5vmin;
-    cursor: pointer;
+    border-radius: 5vmin;
 }
 
 #themeSelection>div div {
@@ -338,10 +300,8 @@ html, body {
     justify-content: center;
     align-items: center;
     background-color: var(--background);
-    border-radius: 3.5vmin;
+    border-radius: 4vmin;
     color: var(--foreground);
-    font-size: min(11.25vh, 23.5vw);
-    font-size: min(calc(var(--vh, 1vh) * 11.25), 23.5vw);
 }
 
 ::placeholder {
@@ -386,6 +346,19 @@ html, body {
     }
 }
 
+@-webkit-keyframes slide-in-bottom {
+    0% {
+        -webkit-transform: translateY(1000px);
+        transform: translateY(1000px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 @keyframes slide-in-bottom {
     0% {
         -webkit-transform: translateY(1000px);
@@ -427,10 +400,9 @@ html, body {
 
 @media screen and (min-device-aspect-ratio: 1/1) and (orientation: landscape) {
     .message {
-        max-height: 87.2vh;
         max-height: calc(var(--vh, 1vh) * 87.2);
         width: 90vw;
-        margin: 0px 5vw;
+        margin: 0 5vw;
         align-items: center;
         align-content: center;
         flex-direction: row;
@@ -439,33 +411,26 @@ html, body {
         flex-grow: 1;
     }
     #weather {
-        margin: 0px;
+        margin: 0;
         flex-wrap: wrap;
         justify-content: center;
     }
     #sunTime {
-        margin-top: 3vh;
         margin-top: calc(var(--vh, 1vh) * 3);
         width: 40%;
         min-width: 0;
-        font-size: 5h;
         font-size: calc(var(--vh, 1vh) * 5);
     }
     #sunTime>svg {
-        height: 5vh;
         height: calc(var(--vh, 1vh) * 5);
-        width: 5vh;
         width: calc(var(--vh, 1vh) * 5);
     }
     #line {
-        height: 4vh;
         height: calc(var(--vh, 1vh) * 4);
     }
     #cityName {
-        margin-top: 5vh;
         margin-top: calc(var(--vh, 1vh) * 5);
         max-width: 35%;
-        font-size: 7vh;
         font-size: calc(var(--vh, 1vh) * 7);
         white-space: normal;
         text-align: center;
@@ -477,33 +442,26 @@ html, body {
         color: var(--foreground);
     }
     #mainImage {
-        margin: 0px;
-        height: 30vh;
+        margin: 0;
         height: calc(var(--vh, 1vh) * 30);
-        width: 30vh;
         width: calc(var(--vh, 1vh) * 30);
     }
     #weatherData {
         width: 50%;
-        height: 53vh;
         height: calc(var(--vh, 1vh) * 53);
     }
     #weatherData>div {
-        height: 30vh;
         height: calc(var(--vh, 1vh) * 25);
         font-size: 2vw;
     }
     #weatherData svg {
-        height: 4vh;
         height: calc(var(--vh, 1vh) * 4);
-        width: 4vh;
         width: calc(var(--vh, 1vh) * 4);
     }
     #weatherData p {
         font-size: 2.5vw;
     }
     #nextDays {
-        margin-top: 4vh;
         margin-top: calc(var(--vh, 1vh) * 4);
         width: 60%;
         display: flex;
@@ -513,69 +471,45 @@ html, body {
         color: var(--foreground);
     }
     .date {
-        font-size: 5vh;
         font-size: calc(var(--vh, 1vh) * 5);
     }
     .weatherIcon {
-        height: 12vh;
         height: calc(var(--vh, 1vh) * 12);
-        width: 12vh;
         width: calc(var(--vh, 1vh) * 12);
     }
     .temp {
-        font-size: 5vh;
         font-size: calc(var(--vh, 1vh) * 5);
     }
     .result {
-        font-size: 6vh;
         font-size: calc(var(--vh, 1vh) * 6);
     }
     .result>img {
-        height: 10vh;
         height: calc(var(--vh, 1vh) * 10);
-        width: 10vh;
         width: calc(var(--vh, 1vh) * 10);
     }
     #topBar {
-        margin: 4vh 2vw 0px 2vw;
-        margin: calc(var(--vh, 1vh) * 4) 2vw 0px 2vw;
+        margin: calc(var(--vh, 1vh) * 4) 2vw 0 2vw;
     }
     #searchBar {
-        height: 8vh;
         height: calc(var(--vh, 1vh) * 8);
-        font-size: 5vh;
         font-size: calc(var(--vh, 1vh) * 5);
-        padding: 0px 4vw;
+        padding: 0 4vw;
     }
     .topBarButton {
-        height: 8vh;
         height: calc(var(--vh, 1vh) * 8);
-        width: 8vh;
         width: calc(var(--vh, 1vh) * 8);
     }
     #searchResults {
         top: 16.8vh;
         top: calc(var(--vh, 1vh) * 16.8);
-        max-height: 83.2vh;
         max-height: calc(var(--vh, 1vh) * 83.2);
     }
     #loadingScreen {
         top: 12.8vh;
         top: calc(var(--vh, 1vh) * 12.8);
-        max-height: 87.2vh;
         max-height: calc(var(--vh, 1vh) * 87.2);
     }
     #themeSelection {
         grid-template-columns: repeat(4, 1fr);
-    }
-    #themeSelection>div {
-        height: min(47vh, 22.5vw);
-        width: min(calc(var(--vh, 1vh) * 47), 22.5vw);
-        height: min(47vh, 22.5vw);
-        width: min(calc(var(--vh, 1vh) * 47), 22.5vw);
-    }
-    #themeSelection>div div {
-        font-size: min(23.5vh, 11.25vw);
-        font-size: min(calc(var(--vh, 1vh) * 23.5), 11.25vw);
     }
 }
