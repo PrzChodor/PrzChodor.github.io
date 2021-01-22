@@ -1,21 +1,18 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
-* {
-    font-family: 'Roboto';
-}
-
-*:focus {
-    outline: none !important
-}
-
+@import 'https://fonts.googleapis.com/css?family=Roboto';
 :root {
     --background: #161B21;
     --foreground: #F4A950;
 }
 
 html, body {
+    font-family: 'Roboto';
     overflow: hidden;
     background-color: var(--background);
     margin: 0;
+}
+
+*:focus {
+    outline: none
 }
 
 .icon {
@@ -157,7 +154,7 @@ html, body {
     font-weight: normal;
     white-space: nowrap;
     overflow: hidden;
-    font-size: calc(var(--vh, 1vh) * 6);
+    font-size: calc(var(--vh, 1vh) * 5);
 }
 
 #mainWeather {
@@ -346,19 +343,6 @@ html, body {
     }
 }
 
-@-webkit-keyframes slide-in-bottom {
-    0% {
-        -webkit-transform: translateY(1000px);
-        transform: translateY(1000px);
-        opacity: 0;
-    }
-    100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 @keyframes slide-in-bottom {
     0% {
         -webkit-transform: translateY(1000px);
@@ -369,19 +353,6 @@ html, body {
         -webkit-transform: translateY(0);
         transform: translateY(0);
         opacity: 1;
-    }
-}
-
-@-webkit-keyframes slide-out-top {
-    0% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        -webkit-transform: translateY(-1000px);
-        transform: translateY(-1000px);
-        opacity: 0;
     }
 }
 
