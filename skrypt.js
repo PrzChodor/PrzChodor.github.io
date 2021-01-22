@@ -100,9 +100,9 @@ function getCities(responseText) {
     i = 0;
     for (var city of cities.geonames) {
         if (city.adminName1 != "")
-            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.adminName1}, ${city.countryCode}</p></div>`;
+            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name.replace("'","\\'")}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.adminName1}, ${city.countryCode}</p></div>`;
         else
-            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.countryCode}</p></div>`;
+            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name.replace("'","\\'")}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.countryCode}</p></div>`;
         if (i == maxResults) {
             document.getElementById("searchResults").innerHTML += `<div class="result" id="loadMore" onclick="loadMore()">Wczytaj więcej...</div>`;
             break;
@@ -138,9 +138,9 @@ function loadMore() {
         let city = cities.geonames[j];
         console.log(cities.geonames.length);
         if (city.adminName1 != "")
-            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.adminName1}, ${city.countryCode}</p></div>`;
+            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name.replace("'","\\'")}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.adminName1}, ${city.countryCode}</p></div>`;
         else
-            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.countryCode}</p></div>`;
+            document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name.replace("'","\\'")}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.countryCode}</p></div>`;
         if (j == i + maxResults) {
             document.getElementById("searchResults").innerHTML += `<div class="result" id="loadMore" onclick="loadMore()">Wczytaj więcej...</div>`;
             i += maxResults;
