@@ -83,6 +83,7 @@ function getLocation() {
 function locationSuccess(position) {
     localStorage.setItem('name', -1);
     document.getElementById("cityName").innerHTML = "Aktualne miejsce";
+    document.title = "Pogoda Lokalna";
     getWeather(position);
 }
 
