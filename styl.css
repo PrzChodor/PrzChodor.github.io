@@ -207,8 +207,8 @@ html, body {
 
 #weatherData svg {
     margin: 0;
-    height: calc(var(--vh, 1vh) * 3);
-    width: calc(var(--vh, 1vh) * 3);
+    height: calc(var(--vh, 1vh) * 5);
+    width: calc(var(--vh, 1vh) * 5);
 }
 
 #weatherData p {
@@ -455,8 +455,8 @@ html, body {
         font-size: 2vw;
     }
     #weatherData svg {
-        height: calc(var(--vh, 1vh) * 4);
-        width: calc(var(--vh, 1vh) * 4);
+        height: calc(var(--vh, 1vh) * 6);
+        width: calc(var(--vh, 1vh) * 6);
     }
     #weatherData p {
         font-size: 2.5vw;
