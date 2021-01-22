@@ -2,6 +2,7 @@ var cities;
 var i;
 var maxResults = 10;
 var lastAvailHeight = window.screen.availHeight;
+var hideLoadingTimeout;
 
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -29,6 +30,20 @@ citiesRequest.onreadystatechange = function () {
 citiesRequest.onerror = function () {
     hideLoading();
     showError("Błąd połączenia z bazą miast! Spróbuj ponownie później.")
+};
+
+var weatherRequest = new XMLHttpRequest();
+weatherRequest.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        loadWeather(this.responseText);
+    } else if (this.status > 299 && this.readyState == 4) {
+        hideLoading();
+        showError("Błąd połączenia ze serwerem pogody! Spróbuj ponownie później.");
+    }
+};
+weatherRequest.onerror = function () {
+    hideLoading();
+    showError("Błąd połączenia ze serwerem pogody! Spróbuj ponownie później.")
 };
 
 setCellSize();
@@ -102,7 +117,6 @@ function searchCity(event) {
         return;
     }
     citiesRequest.abort();
-    hideLoading();
     var text = document.getElementById("searchBar").value;
     if (text.length > 2) {
         showLoading();
@@ -110,6 +124,7 @@ function searchCity(event) {
         citiesRequest.open("GET", `https://secure.geonames.org/searchJSON?name_startsWith=${document.getElementById("searchBar").value}&style=LONG&maxRows=1000&orderby=population&username=przchodor`, true);
         citiesRequest.send();
     } else {
+        document.getElementById("loadingScreen").style.display = "none";
         document.getElementById("searchResults").innerHTML = '';
     }
 }
@@ -136,6 +151,7 @@ function loadMore() {
 function loadCity(lat, lng, name) {
     localStorage.setItem('name', name);
     document.getElementById("cityName").innerHTML = name;
+    document.title = "Pogoda " + name;
     document.getElementById("searchResults").innerHTML = '';
     document.getElementById("searchBar").value = '';
     var position = {
@@ -151,26 +167,13 @@ function getWeather(position) {
     localStorage.setItem('lat', position.coords.latitude);
     localStorage.setItem('lng', position.coords.longitude);
     showLoading();
-    var weatherRequest = new XMLHttpRequest();
-    weatherRequest.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            loadWeather(this.responseText);
-        } else if (this.status > 299 && this.readyState == 4) {
-            hideLoading();
-            showError("Błąd połączenia ze serwerem pogody! Spróbuj ponownie później.");
-        }
-    };
-    weatherRequest.onerror = function () {
-        hideLoading();
-        showError("Błąd połączenia ze serwerem pogody! Spróbuj ponownie później.")
-    };
+    weatherRequest.abort();
     weatherRequest.open("GET", `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude=minutely,hourly,alerts&units=metric&lang=pl&appid=a599189cf2973ef94f4f439e2f79b198`, true);
     weatherRequest.send();
 }
 
 function loadWeather(responseText) {
     var weather = JSON.parse(responseText);
-    document.getElementById("welcome").style.display = "none";
     var sunrise = new Date((weather.current.sunrise + weather.timezone_offset) * 1000);
     var sunset = new Date((weather.current.sunset + weather.timezone_offset) * 1000);
     var userTimezoneOffset = sunrise.getTimezoneOffset() * 60000;
@@ -226,9 +229,11 @@ function showLoading() {
 }
 
 function hideLoading() {
+    clearTimeout(hideLoadingTimeout);
+    document.getElementById("loadingScreen").style.opacity = 1;
     document.getElementById('loadingScreen').style.transition = "opacity 1s";
     document.getElementById("loadingScreen").style.opacity = 0;
-    setTimeout(function () {
+    hideLoadingTimeout = setTimeout(function () {
         document.getElementById("loadingScreen").style.display = "none";
     }, 1000);
 }
@@ -239,6 +244,7 @@ function showWelcome() {
     element.style.display = "flex";
     document.getElementById("error").style.display = "none";
     document.getElementById("weather").style.display = "none";
+    document.title = "Aplikacja Pogodowa"
     element.classList.remove("slide-in-anim");
     void element.offsetWidth;
     element.classList.add("slide-in-anim");
@@ -253,6 +259,18 @@ function showWeather() {
     void element.offsetWidth;
     element.classList.add("slide-in-anim");
     hideLoading();
+}
+
+function showError(e) {
+    var element = document.getElementById("error");
+    element.style.display = "flex";
+    document.getElementById("welcome").style.display = "none";
+    document.getElementById("weather").style.display = "none";
+    document.getElementById("errorMsg").innerHTML = e;
+    document.title = "Błąd - Aplikacja Pogodowa"
+    element.classList.remove("slide-in-anim");
+    void element.offsetWidth;
+    element.classList.add("slide-in-anim");
 }
 
 function showThemeSelection() {
@@ -297,22 +315,10 @@ function setCellSize() {
     var themeSelectorCells = document.getElementById("themeSelection").children;
     for (let index = 0; index < themeSelectorCells.length; index++) {
         const element = themeSelectorCells[index];
-        console.log(element);
         element.style.height = elementSize + "px";
         element.style.width = elementSize + "px";
         element.style.fontSize = 0.6 * elementSize + "px";
     }
-}
-
-function showError(e) {
-    var element = document.getElementById("error");
-    element.style.display = "flex";
-    document.getElementById("welcome").style.display = "none";
-    document.getElementById("weather").style.display = "none";
-    document.getElementById("errorMsg").innerHTML = e;
-    element.classList.remove("slide-in-anim");
-    void element.offsetWidth;
-    element.classList.add("slide-in-anim");
 }
 
 function hideKeyboard() {

@@ -272,7 +272,7 @@ html, body {
     grid-template-columns: repeat(2, 1fr);
     height: calc(var(--vh, 1vh) * 60);
     width: 60vw;
-    display: grid;
+    display: none;
     row-gap: calc(var(--vh, 1vh) * 2);
     column-gap: 2vw;
     padding: calc(var(--vh, 1vh) * 20) 20vw;
