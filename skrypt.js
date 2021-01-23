@@ -1,18 +1,24 @@
-var cities;
-var i;
-var maxResults = 10;
-var lastAvailHeight = window.screen.availHeight;
-var hideLoadingTimeout;
+var cities;                                         //Lista miast
+var currentResults;                                 //Ilość obecnie wyświetlonych miast
+var maxResults = 10;                                //Ilość wyświetlanych jednorazowo nazw miast
+var lastAvailHeight = window.screen.availHeight;    //Ostatnia wysokość ekranu
+var hideLoadingTimeout;                             //Przerwa do zankończenia animacji ukrywania wczytywania
 
+//Ustalenie vh ignorującego pasek URL przeglądarki mobilnej
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 window.addEventListener('resize', () => {
+    //Spawdzenie czy może być wysunięta klawiatura na urządzeniu mobilnym i czy nie zmieniono jego orientacji
     if (document.activeElement !== document.getElementById("searchBar") || lastAvailHeight != window.screen.availHeight || !/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        //Jeśli zmieniono orientację ekranu
         if (lastAvailHeight != window.screen.availHeight)
             hideKeyboard();
+
+        //Ustalenie vh ignorującego pasek URL przeglądarki mobilnej
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
+
         lastAvailHeight = window.screen.availHeight;
         setCellSize();
     }
@@ -55,6 +61,7 @@ function checkStorage() {
     var lat = localStorage.getItem('lat');
     var lng = localStorage.getItem('lng');
 
+    //Sprawdzenie czy ostatnio użyto lokalizacji
     if (cityName == -1) {
         getLocation();
     } else if (cityName != null) {
@@ -95,19 +102,22 @@ function locationFailure() {
 
 function getCities(responseText) {
     cities = JSON.parse(responseText);
-    cities.geonames = removeDuplicates(cities.geonames);
+    cities.geonames = removeDuplicates(cities.geonames); 
+    //Wyczyszczenie listy wyników
     document.getElementById("searchResults").innerHTML = '';
-    i = 0;
+    currentResults = 0;
     for (var city of cities.geonames) {
         if (city.adminName1 != "")
             document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name.replace("'","\\'")}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.adminName1}, ${city.countryCode}</p></div>`;
         else
             document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name.replace("'","\\'")}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.countryCode}</p></div>`;
-        if (i == maxResults) {
+        
+        //Jeśli wyników jest więcej niż 10 to dodaj przycisk do wczytania kolejnych 10
+        if (currentResults == maxResults) {
             document.getElementById("searchResults").innerHTML += `<div class="result" id="loadMore" onclick="loadMore()">Wczytaj więcej...</div>`;
             break;
         }
-        i++;
+        currentResults++;
     }
     hideLoading();
 }
@@ -117,33 +127,41 @@ function searchCity(event) {
         hideKeyboard();
         return;
     }
+    //Jeśli zmieniono nazwę do wyszukania anuluj poprzednie wyszukiwanie
     citiesRequest.abort();
     var text = document.getElementById("searchBar").value;
     if (text.length > 2) {
         showLoading();
+        //Wyczyszczenie listy wyników
         document.getElementById("searchResults").innerHTML = '';
         citiesRequest.open("GET", `https://secure.geonames.org/searchJSON?name_startsWith=${document.getElementById("searchBar").value}&style=LONG&maxRows=1000&orderby=population&username=przchodor`, true);
         citiesRequest.send();
     } else {
+        //Nie wyświetlaj wyników dla nazw krótszych od 3 znaków
         document.getElementById("loadingScreen").style.display = "none";
         document.getElementById("searchResults").innerHTML = '';
     }
 }
 
 function loadMore() {
+    //Usuń przycisk do wczytania kolejnych nazw z listy
     var deleteDiv = document.getElementById("loadMore");
     deleteDiv.remove();
+
     var text = document.getElementById("searchBar").value;
-    for (let j = i + 1; j < cities.geonames.length; j++) {
-        let city = cities.geonames[j];
-        console.log(cities.geonames.length);
+
+    //Wyświetl 10 kolejnych nazw
+    for (let i = currentResults + 1; i < cities.geonames.length; i++) {
+        let city = cities.geonames[i];
         if (city.adminName1 != "")
             document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name.replace("'","\\'")}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.adminName1}, ${city.countryCode}</p></div>`;
         else
             document.getElementById("searchResults").innerHTML += `<div class="result" onclick="loadCity(${city.lat}, ${city.lng}, '${city.name.replace("'","\\'")}')"><svg class="icon"><use xlink:href="icons.svg#icon-Place"></use></svg><p>${city.name}, ${city.countryCode}</p></div>`;
-        if (j == i + maxResults) {
+        
+        //Jeśli nadal istnieją niewyświetlone wyniki to dodaj przycisk do wczytania kolejnych 10
+        if (i == currentResults + maxResults) {
             document.getElementById("searchResults").innerHTML += `<div class="result" id="loadMore" onclick="loadMore()">Wczytaj więcej...</div>`;
-            i += maxResults;
+            currentResults += maxResults;
             break;
         }
     }
@@ -175,11 +193,13 @@ function getWeather(position) {
 
 function loadWeather(responseText) {
     var weather = JSON.parse(responseText);
+    //Przetworzenie czasu na poprawny dla danego miejsca
     var sunrise = new Date((weather.current.sunrise + weather.timezone_offset) * 1000);
     var sunset = new Date((weather.current.sunset + weather.timezone_offset) * 1000);
     var userTimezoneOffset = sunrise.getTimezoneOffset() * 60000;
     sunrise = new Date(sunrise.getTime() + userTimezoneOffset);
     sunset = new Date(sunset.getTime() + userTimezoneOffset);
+    //Wypisanie otrzymanych danych na ekran
     document.getElementById("sunrise").innerHTML = `${(sunrise.getHours()<10 ? '0'  : '') + sunrise.getHours()}:${(sunrise.getMinutes()<10 ? '0'  : '') + sunrise.getMinutes()}`;
     document.getElementById("sunset").innerHTML = `${(sunset.getHours()<10 ? '0'  : '') + sunset.getHours()}:${(sunset.getMinutes()<10 ? '0'  : '') + sunset.getMinutes()}`;
     document.getElementById("currentTemp").innerHTML = Math.round(weather.current.temp) + "°C";
@@ -204,6 +224,7 @@ function loadWeather(responseText) {
     showWeather();
 }
 
+//Usuwanie identycznych nazw z listy
 function removeDuplicates(arr) {
     var uniques = [];
     arr.forEach(function (city1) {
@@ -218,6 +239,7 @@ function removeDuplicates(arr) {
     return uniques;
 }
 
+//Sztuczne spowolnienie ukrywania wczytywania
 function showReloading() {
     showLoading();
     setTimeout(hideLoading, 100);
@@ -225,13 +247,16 @@ function showReloading() {
 
 function showLoading() {
     document.getElementById("loadingScreen").style.display = "initial";
+    //Usunięcie animacji
     document.getElementById('loadingScreen').style.transition = "none";
     document.getElementById("loadingScreen").style.opacity = 1;
 }
 
 function hideLoading() {
+    //Zapobiegnięcie odmierzaniu wielu przerw jednocześnie
     clearTimeout(hideLoadingTimeout);
     document.getElementById("loadingScreen").style.opacity = 1;
+    //Dodanie animacji
     document.getElementById('loadingScreen').style.transition = "opacity 1s";
     document.getElementById("loadingScreen").style.opacity = 0;
     hideLoadingTimeout = setTimeout(function () {
@@ -246,6 +271,7 @@ function showWelcome() {
     document.getElementById("error").style.display = "none";
     document.getElementById("weather").style.display = "none";
     document.title = "Aplikacja Pogodowa"
+    //Odtworzenie animacji
     element.classList.remove("slide-in-anim");
     void element.offsetWidth;
     element.classList.add("slide-in-anim");
@@ -256,6 +282,7 @@ function showWeather() {
     element.style.display = "flex";
     document.getElementById("error").style.display = "none";
     document.getElementById("welcome").style.display = "none";
+    //Odtworzenie animacji
     element.classList.remove("slide-in-anim");
     void element.offsetWidth;
     element.classList.add("slide-in-anim");
@@ -269,6 +296,7 @@ function showError(e) {
     document.getElementById("weather").style.display = "none";
     document.getElementById("errorMsg").innerHTML = e;
     document.title = "Błąd - Aplikacja Pogodowa"
+    //Odtworzenie animacji
     element.classList.remove("slide-in-anim");
     void element.offsetWidth;
     element.classList.add("slide-in-anim");
@@ -277,10 +305,10 @@ function showError(e) {
 function showThemeSelection() {
     var element = document.getElementById("themeSelection");
     element.style.display = "grid";
+    //Odtworzenie animacji wejścia
     element.classList.remove("slide-in-anim");
     void element.offsetWidth;
     element.classList.add("slide-in-anim");
-
     setTimeout(function () {
         element.classList.remove("slide-in-anim");
     }, 1000);
@@ -288,16 +316,17 @@ function showThemeSelection() {
 
 function hideThemeSelection() {
     var element = document.getElementById("themeSelection");
+    //Odtworzenie animacji wyjścia
     element.classList.remove("slide-out-top");
     void element.offsetWidth;
     element.classList.add("slide-out-top");
-
     setTimeout(function () {
         element.style.display = "none";
         element.classList.remove("slide-out-top");
     }, 500);
 }
 
+//Zmiana motywu aplikacji
 function changeTheme(foreground, background) {
     document.documentElement.style.setProperty('--foreground', foreground);
     document.documentElement.style.setProperty('--background', background);
@@ -306,14 +335,18 @@ function changeTheme(foreground, background) {
     hideThemeSelection();
 }
 
+//Ustalenie wielkości komórki w siatce motywów
 function setCellSize() {
     var elementSize = 0;
     if (window.innerHeight > window.innerWidth)
+        //Orientacja pionowa
         elementSize = Math.min(0.135 * window.innerHeight, 0.29 * window.innerWidth);
     else
+        //Orientacja pozioma
         elementSize = Math.min(0.29 * window.innerHeight, 0.135 * window.innerWidth);
 
     var themeSelectorCells = document.getElementById("themeSelection").children;
+    //Zastosowanie wielkości dla każdej komórki
     for (let index = 0; index < themeSelectorCells.length; index++) {
         const element = themeSelectorCells[index];
         element.style.height = elementSize + "px";
